@@ -10,9 +10,11 @@ import {
   TextField,
 } from "@material-ui/core";
 import { login } from "./store/utils/thunkCreators";
+import { useStyles } from "./themes/loginSignup";
 
 const Login = (props) => {
   const history = useHistory();
+  const classes = useStyles();
   const { user, login } = props;
 
   const handleLogin = async (event) => {
@@ -28,16 +30,20 @@ const Login = (props) => {
   }
 
   return (
-    <Grid container justifyContent="center">
-      <Box>
-        <Grid container item>
-          <Typography>Need to register?</Typography>
-          <Button onClick={() => history.push("/register")}>Register</Button>
+    <Grid container justifyContent="center" className={classes.root}>
+      <Typography variant='h3' align='center' className={classes.mainText}>
+        Converse with anyone <br /> with any language
+      </Typography>
+      <Box className={classes.formContainer}>
+        <Grid container item className={classes.switchPageContainer}>
+          <Typography className={classes.switchPageCTA}>Don't have an account?</Typography>
+          <Button className={classes.switchPageButton} color='primary' onClick={() => history.push("/register")}>Create account</Button>
         </Grid>
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleLogin} className={classes.inputsForm, classes.login}>
           <Grid>
+            <Typography className={classes.genericText} align='center' variant="h3">Welcome Back!</Typography>
             <Grid>
-              <FormControl margin="normal" required>
+              <FormControl margin="none" required className={classes.inputContainer} fullWidth={true}>
                 <TextField
                   aria-label="username"
                   label="Username"
@@ -46,7 +52,7 @@ const Login = (props) => {
                 />
               </FormControl>
             </Grid>
-            <FormControl margin="normal" required>
+            <FormControl margin="dense" required className={classes.inputContainer} fullWidth={true}>
               <TextField
                 label="password"
                 aria-label="password"
@@ -55,7 +61,7 @@ const Login = (props) => {
               />
             </FormControl>
             <Grid>
-              <Button type="submit" variant="contained" size="large">
+              <Button className={classes.submitButton} color="primary" type="submit" variant="contained" size="large">
                 Login
               </Button>
             </Grid>
@@ -81,3 +87,5 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
+

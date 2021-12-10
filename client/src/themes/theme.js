@@ -7,13 +7,18 @@ export const theme = createTheme({
     button: {
       textTransform: "none",
       letterSpacing: 0,
-      fontWeight: "bold"
+      fontWeight: "bold",
     }
   },
   overrides: {
     MuiInput: {
       input: {
         fontWeight: "bold"
+      }
+    },
+    MuiFormControl: {
+      root:{
+        padding: 0,
       }
     }
   },
