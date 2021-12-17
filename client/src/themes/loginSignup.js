@@ -1,126 +1,153 @@
-import BgImg from "../assets/bg-img.png";
 import { makeStyles } from "@material-ui/core";
+import BgImg from "../assets/bg-img.png";
 
-const mobilePadding = '10px';
-// const primary='#3A8DFF';
-// const secondary='#B0B0B0';
-/*
-    I was having a strange bug with the 'sm' breakpoint not 
-    adjusting properly between 600-625px, so I just raised the breakpoint
-    up to 625.
-*/
-const smallBreakpoint='625';
 export const useStyles = makeStyles((theme) => ({
     root: {
         position: 'relative',
-        zIndex: 0,
-        backgroundImage: `url(${BgImg})`,
-        backgroundPosition: 'top',
-        backgroundSize: '100% 70%',
-        backgroundRepeat: 'no-repeat',
-        width: '100vw',
-        minHeight: '100vh',
         display: 'flex',
+        flexDirection: 'column',
+        backgroundImage: `url(${BgImg})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '100% 80%',
+        backgroundPosition: 'top center',
+        minHeight: '100vh',
+        width: '100vw',
+        backgroundColor: theme.palette.primary.main,
+        fontSize: theme.typography.fontSize,
+        fontFamily: theme.typography.fontFamily,
         '&::before': {
             content: '""',
-            backgroundColor: '#599AF7',
-            opacity: 0.75,
+            backgroundColor: theme.palette.primary.main,
+            opacity: 0.7,
             position: "absolute",
             zIndex: 1,
             height: '100%',
             width: '100%',
         },
-        [theme.breakpoints.up(smallBreakpoint)]:{
+        [theme.breakpoints.up('sm')]: {
             backgroundSize: '40% 100%',
-            backgroundPosition:'left',
-            position: 'relative',
+            backgroundPosition: 'left',
         },
     },
-    mainText: {
-        display: 'block',
-        width: 'fit-content',
-        height: 60,
-        fontSize: '1.5rem',
-        color: '#fff',
-        position: 'relative',
-        zIndex: 5,
-        marginTop: 150,
-        [theme.breakpoints.up(smallBreakpoint)]:{
-            display: 'flex',
-            height: '100vh',
-            maxWidth: '250px',
-            width: '250px',
-            alignItems: 'center',
-            margin: '0 auto',
-        }
-    },
-    formContainer: {
-        zIndex: 5,
-        backgroundColor: 'rgb(255,255,255)',
-        marginTop: 'auto',
-        paddingBottom: mobilePadding,
-        textAlign: 'center',
-        width: '100vw',
-        minHeight: '50vh',
+    sidebar: {
+        position: 'absolute',
+        zIndex: 1,
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
-        position: 'relative',
-        [theme.breakpoints.up(smallBreakpoint)]:{
-            width: '60vw',
-            marginTop: 0,
+        textAlign: 'center',
+        top: '30vh',
+        [theme.breakpoints.up('sm')]: {
+            position: 'relative',
+            width: '40vw'
         },
-        
     },
-    switchPageContainer: {
+    icon: {
+        position: 'absolute',
+        top: 0,
+        left: '50%',
+        transform: 'translate(-50%, -100%)',
+        [theme.breakpoints.up('sm')]: {
+            transform: 'translate(-50%, 0)',
+        },
+    },
+    slogan: {
+        fontSize: '1.5rem',
+        zIndex: 1,
+        color: theme.palette.whiteFont,
+        position: 'absolute',
+        padding: 0,
+        margin: 0,
+        width: '100%',
+        transform: 'translateY(60px)',
+        [theme.breakpoints.up('sm')]: {
+        transform: 'translateY(130px)',
+        },
+    },
+    mainComponent: {
+        position: 'absolute',
+        zIndex: 1,
+        fontFamily: theme.typography.fontFamily,
+        fontSize: theme.typography.fontSize,
+        backgroundColor: theme.palette.formBackground.main,
+        bottom: 0,
+        width: '100vw',
+        minHeight: '50vh',
+        [theme.breakpoints.up('sm')]: {
+            position: 'relative',
+            height: '100vh',
+            width: '60vw',
+            marginLeft: 'auto',
+            padding: 0,
+        },
+    },
+    //NAV
+    nav: {
         display: 'flex',
-        justifyContent: 'space-around',
+        justifyContent: 'space-evenly',
+        width: '100%',
+        height: '60px',
         alignItems: 'center',
-        height: mobilePadding,
-        height: 'fit-content',
-        [theme.breakpoints.up(smallBreakpoint)]:{
-            marginTop: 30,
-        }
+        backgroundColor: theme.palette.formBackground.main,
+        [theme.breakpoints.up('sm')]: {
+            justifyContent: 'flex-end',
+            marginTop: theme.spacing(5),
+        },
     },
-    switchPageCTA: {
-        fontSize: '0.9rem',
-        color: "#C5C",
+    switchPageMessage: {
+        fontSize: theme.typography.fontSizes.small,
+        color: theme.palette.secondary.main,
+        padding: theme.spacing(0),
+        margin: theme.spacing(0),
     },
     switchPageButton: {
-        color: '#0000ff',
-        fontSize: '0.9rem'
-    },
-    genericText: {
-        fontSize: '1.5rem',
-        marginTop: 2,
-        padding:0,
-        [theme.breakpoints.up(smallBreakpoint)]:{
-            fontSize: '2rem',
-        }
-    },
-    inputsForm:{
-        width: '80%',
-        height: '100%',
-        [theme.breakpoints.up(smallBreakpoint)]:{
-            marginTop: '15%'
+        color: theme.palette.primary.main,
+        boxShadow: `0 3px 2px rgba(${theme.palette.secondary.hex},${theme.palette.secondary.hex},${theme.palette.secondary.hex}, 0.5)`,
+        textTransform: theme.typography.button.textTransform,
+        letterSpacing: theme.typography.button.letterSpacing,
+        fontWeight: theme.typography.button.fontWeight,
+        fontSize: theme.typography.fontSizes.small,
+        padding: `${theme.spacing(10)}px ${theme.spacing(40)}px`,
+        [theme.breakpoints.up('sm')]: {
+            margin: `0 ${theme.spacing(30)}px`
         },
     },
-    login:{
-        width: '80%',
-        height: '100%',
-        marginTop: '10%',
-        [theme.breakpoints.up(smallBreakpoint)]:{
-            marginTop: '22%'
+    //FORM
+    form: {
+        position: 'relative',
+        zIndex: 1,
+        backgroundColor: theme.palette.formBackground.main,
+        width: '100%',
+        [theme.breakpoints.up('sm')]: {
+            marginTop: theme.spacing(100)
         },
-
     },
-    inputContainer:{
-        [theme.breakpoints.up(smallBreakpoint)]:{
-            padding: '5px 0',
-        }
+    formContainer: {
+        width: '75%',
+        textAlign: 'center',
+        margin: '0 auto',
+    },
+    formMessage: {
+        fontWeight: 'bold',
+        fontSize: theme.typography.fontSizes.large,
+        [theme.breakpoints.up('sm')]: {
+            textAlign: 'left',
+        },
+    },
+    MuiFormControl: {
+        backgroundColor: 'red',
     },
     submitButton: {
-      color: "#FFF",
-      margin: `${mobilePadding} 0`,
+        margin: `${theme.spacing(10)}px 0`,
+        color: theme.palette.whiteFont,
+        backgroundColor: theme.palette.primary.main,
+        boxShadow: `0 3px 2px rgba(${theme.palette.secondary.hex},${theme.palette.secondary.hex},${theme.palette.secondary.hex}, 0.5)`,
+        textTransform: theme.typography.button.textTransform,
+        letterSpacing: theme.typography.button.letterSpacing,
+        fontWeight: theme.typography.button.fontWeight,
+        fontSize: theme.typography.fontSizes.small,
+        padding: `${theme.spacing(10)}px ${theme.spacing(40)}px`,
+        [theme.breakpoints.up('sm')]: {
+            margin: `${theme.spacing(25)}px 0`
+        },
     },
 }));
