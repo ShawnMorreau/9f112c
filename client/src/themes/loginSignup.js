@@ -8,8 +8,6 @@ export const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         backgroundImage: `url(${BgImg})`,
         backgroundRepeat: 'no-repeat',
-        backgroundSize: '100% 80%',
-        backgroundPosition: 'top center',
         minHeight: '100vh',
         width: '100vw',
         backgroundColor: theme.palette.primary.main,
@@ -71,7 +69,7 @@ export const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.formBackground.main,
         bottom: 0,
         width: '100vw',
-        minHeight: '50vh',
+        minHeight: '100vh',
         [theme.breakpoints.up('sm')]: {
             position: 'relative',
             height: '100vh',
@@ -80,7 +78,6 @@ export const useStyles = makeStyles((theme) => ({
             padding: 0,
         },
     },
-    //NAV
     nav: {
         display: 'flex',
         justifyContent: 'space-evenly',
@@ -107,16 +104,20 @@ export const useStyles = makeStyles((theme) => ({
         fontWeight: theme.typography.button.fontWeight,
         fontSize: theme.typography.fontSizes.small,
         padding: `${theme.spacing(10)}px ${theme.spacing(40)}px`,
+        '&:hover': {
+            backgroundColor: '#fff',
+        },
         [theme.breakpoints.up('sm')]: {
             margin: `0 ${theme.spacing(30)}px`
         },
+        
     },
-    //FORM
     form: {
         position: 'relative',
         zIndex: 1,
         backgroundColor: theme.palette.formBackground.main,
         width: '100%',
+        marginTop: theme.spacing(100),
         [theme.breakpoints.up('sm')]: {
             marginTop: theme.spacing(100)
         },
@@ -127,7 +128,7 @@ export const useStyles = makeStyles((theme) => ({
         margin: '0 auto',
     },
     formMessage: {
-        fontWeight: 'bold',
+        fontWeight: 900,
         fontSize: theme.typography.fontSizes.large,
         [theme.breakpoints.up('sm')]: {
             textAlign: 'left',
@@ -146,6 +147,9 @@ export const useStyles = makeStyles((theme) => ({
         fontWeight: theme.typography.button.fontWeight,
         fontSize: theme.typography.fontSizes.small,
         padding: `${theme.spacing(10)}px ${theme.spacing(40)}px`,
+        '&:hover': {
+            backgroundColor: theme.palette.primary.main,
+        },
         [theme.breakpoints.up('sm')]: {
             margin: `${theme.spacing(25)}px 0`
         },

@@ -10,9 +10,9 @@ import {
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { useStyles } from "../themes/loginSignup";
-import {ReactComponent as Bubble} from "../assets/bubble.svg";
+import { ReactComponent as Bubble } from "../assets/bubble.svg";
 
-export const LoginSignup = (props) => {
+export const LoginSignupLandingPage = (props) => {
     const history = useHistory();
     const classes = useStyles();
     const { boldText, pageText, historyToPush, switchPageButtonText, handleSubmit, submitButtonText, isLogin, formErrorMessage = {} } = props;
@@ -20,7 +20,7 @@ export const LoginSignup = (props) => {
     return (
         <Grid container justifyContent="center" className={classes.root}>
             <Grid container justifyContent="center" className={classes.sidebar}>
-                <Bubble className={classes.icon}/>
+                <Bubble className={classes.icon} />
                 <Typography className={classes.slogan}>Converse with anyone <br /> with any language</Typography>
             </Grid>
             <Box className={classes.mainComponent}>
@@ -75,8 +75,8 @@ export const LoginSignup = (props) => {
                             </FormControl>
                         </Grid>
                         {!isLogin && (
-                            < Grid >
-                                <FormControl fullWidth={true}  error={!!formErrorMessage.confirmPassword}>
+                            <Grid>
+                                <FormControl fullWidth={true} error={!!formErrorMessage.confirmPassword}>
                                     <TextField
                                         label="Confirm Password"
                                         aria-label="confirm password"

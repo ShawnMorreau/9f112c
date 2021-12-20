@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Redirect} from "react-router-dom";
 import { connect } from "react-redux";
 import { register } from "./store/utils/thunkCreators";
-import { LoginSignup } from "./components/LoginSignup";
+import { LoginSignupLandingPage } from "./components/LoginSignupLandingPage";
 
 const Login = (props) => {
   const { user, register } = props;
@@ -28,7 +28,7 @@ const Login = (props) => {
   }
 
   return (
-    <LoginSignup
+    <LoginSignupLandingPage
       pageText={"Already have an account?"}
       boldText={"Create an account."}
       historyToPush={"/login"}
