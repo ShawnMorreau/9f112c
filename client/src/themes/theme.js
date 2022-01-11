@@ -16,6 +16,12 @@ export const theme = createTheme({
       standard: 14,
       large: '1.3rem',
     },
+    chatBubble: {
+      fontSize: 14,
+      letterSpacing: -0.2,
+      padding: 8,
+      fontWeight: "bold",
+    }
   },
   overrides: {
     MuiInput: {
@@ -37,7 +43,28 @@ export const theme = createTheme({
     primary: { main: "#3A8DFF" },
     secondary: { main: "#B0B0B0", hex: 176 },
     formBackground: { main: '#FFFFFF' },
-    whiteFont: '#FFF'
+    whiteFont: '#FFF',
+    chatBubbles: {
+      sent: "#91A3C0",
+      sentBG: "#F4F6FA",
+      recieved: '#FFF',
+      recievedBG: "linear-gradient(225deg, #6CC1FF 0%, #3A8DFF 100%)",
+    },
+    chatbox: "#F4F6FA",
+  },
+  images:{
+      largerImage: {
+        maxWidth: 135,
+        width: 135,
+        maxHeight: 100,
+        height: 100,
+      },
+      smallerImage: {
+        maxWidth: 100,
+        width: 100,
+        maxHeight: 88,
+        height: 88,
+      },
   },
   spacing: 1
 });

@@ -1,25 +1,36 @@
 import React, { useRef, useState } from "react";
 import { FormControl, FilledInput, InputAdornment, IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { AttachFileSharp } from "@material-ui/icons";
+import { FileCopyOutlined } from "@material-ui/icons";
 import { connect } from "react-redux";
 import { postMessage } from "../../store/utils/thunkCreators";
 import ImageInput, { hostImage, verifyFile } from "./ImageInput";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     justifySelf: "flex-end",
     marginTop: 15
   },
   input: {
     height: 70,
-    backgroundColor: "#F4F6FA",
+    backgroundColor: theme.palette.chatbox,
     borderRadius: 8,
     marginBottom: 20,
     "&:hover": {
-      backgroundColor: "#F4F6FA"
+      backgroundColor: theme.palette.chatbox
     }
   },
+  icon: {
+    opacity: "60%",
+    "&:hover": {
+      opacity: 1,
+    }
+  },
+  iconHolder: {
+    "&:hover": {
+      backgroundColor: theme.palette.chatbox,
+    }
+  }
 }));
 
 const Input = (props) => {
@@ -34,11 +45,15 @@ const Input = (props) => {
     setText(event.target.value);
   };
 
-  const updateFiles = (newFile) => {
-    const fileName = `${newFile.original_filename}.${newFile.format}`;
-    const newFiles = [...files, newFile.secure_url];
-    setFileNames([...fileNames, fileName]);
-    setFiles(newFiles);
+  const updateFiles = (newFiles) => {
+    let urls = [];
+    let fileNames = [];
+    const files = newFiles.forEach(newFile => {
+      fileNames.push(`${newFile.data.original_filename}.${newFile.data.format}`);
+      urls.push(newFile.data.secure_url);
+    })
+    setFiles(urls, ...[files]);
+    setFileNames(fileNames, ...[fileNames])
   }
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -56,14 +71,16 @@ const Input = (props) => {
     setFileNames([]);
   };
   const imageSelected = async (e) => {
+    let files = []
     e.preventDefault();
-    const file = e.target.files[0];
-    if (verifyFile(file)) {
-      const data = await hostImage(file);
-      const res = await data.json();
-      updateFiles(res);
+    for (const file of [...e.target.files]) {
+      if (verifyFile(file)) {
+        const res = await hostImage(file);
+        files = [res, ...files];
+      }
     }
     selectedFile.current.blur();
+    updateFiles(files);
   };
 
   return (
@@ -73,6 +90,8 @@ const Input = (props) => {
         ref={selectedFile}
         style={{ display: "none" }}
         onChange={imageSelected}
+        name="files[]"
+        multiple="multiple"
       />
       <FormControl fullWidth hiddenLabel>
         <FilledInput
@@ -89,8 +108,11 @@ const Input = (props) => {
                   aria-label="attach image"
                   onClick={() => selectedFile.current.click()}
                   edge="end"
+                  className={classes.iconHolder}
                 >
-                  <AttachFileSharp />
+                  <FileCopyOutlined
+                    className={classes.icon}
+                  />
                 </IconButton>
               </InputAdornment>
             </>
